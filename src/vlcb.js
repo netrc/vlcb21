@@ -6470,13 +6470,20 @@ const vlcb = {
   }
 }
 
+const piSort = (a,b) => parseInt(a)-parseInt(b)
+
 const stdFuncs = t => {
-  return {
+  const tObj = {
     names: vlcb[t].records.map( c => c.fields.name ),
     getName: (n) => vlcb[t].records.filter( c => c.fields.name==n ),
     getId: (id) => vlcb[t].records.filter( r => r.id==id ),
     all: vlcb[t].records
   }
+  if (t == 'rubbings') { // specific to rubbings
+    tObj.vlcnAll = vlcb.rubbings.records.map( r => r.fields.vlcn ).sort(piSort)
+    tObj.byVLCN = (vlcn) => vlcb.rubbings.records.filter( r => vlcn==r.fields.vlcn )[0].fields
+  }
+  return tObj
 }
 
 exports.churches = stdFuncs('churches')
