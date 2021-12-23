@@ -3,7 +3,7 @@
     <v-row >
 
       <v-col class="mb-1" cols="3">
-        <v-row v-for="rn in rubbingNames" :key="rn" >
+        <v-row v-for="rn in vlcnAll" :key="rn" >
           <v-btn block plain @click="rrClick(rn)"> {{rn}} </v-btn>
         </v-row>
       </v-col>
@@ -13,11 +13,17 @@
 
  <v-container>
   <v-row>
-        <h1> {{currRubbing.fields.name}} </h1>
+        <h1> {{currRubbing.vlcn}}: {{currRubbing.name}} </h1>
         <br>
   </v-row>
   <v-row>
-        {{currRubbing.fields.mainNote}}
+        {{currRubbing.desc}}
+  </v-row>
+  <v-row>
+        location: {{currRubbing.location}}
+  </v-row>
+  <v-row>
+        {{currRubbing.mainNote}}
   </v-row>
   <v-row>
         <v-img :src="rimgsrc"> </v-img>
@@ -37,20 +43,24 @@ const vlcb = require('../vlcb.js')
   export default {
     name: 'Rubbings',
 
-    data: () => ({
-      rubbingNames: vlcb.rubbings.names,
-      currRubbing: vlcb.rubbings.getName(vlcb.rubbings.names[0])[0],
-      rimgsrc: null,
-    }),
+    data: () => {
+      return {
+        rubbingNames: vlcb.rubbings.names,
+        vlcnAll: vlcb.rubbings.vlcnAll,
+        currRubbing: vlcb.rubbings.getName(vlcb.rubbings.names[0])[0],
+        rimgsrc: null,
+      }
+    },
 
     methods: {
       rrClick: function(n) {
-        console.log(`-------------------------${n}------------`)
-        const u = vlcb.rubbings.getName(n)[0]
+        console.log(`rubbings: click on ${n}`)
+        const u = vlcb.rubbings.byVLCN(n)
 console.dir(u)
         this.currRubbing = u    // NOTE DAMN WELL - this only works in function not ()=>
-        if (('pictures' in u.fields) && u.fields.pictures.length>0) {
-          const r = u.fields.pictures[0]
+// why not fields? // note no 'fields' in html {{}} above
+        if (('pictures' in u) && u.pictures.length>0) {
+          const r = u.pictures[0]
 console.log(`r: ${r}`)
           const p = vlcb.pictures.getId(r)
 console.dir(p)
