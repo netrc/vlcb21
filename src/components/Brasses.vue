@@ -16,8 +16,7 @@
         <h1> {{currBrass.fields.name}} </h1>
         <br>
   </v-row>
-  <v-row>
-        {{currBrass.fields.mainNote}}
+  <v-row v-html="currBrass.mainNote_html">
   </v-row>
   <v-row>
         <v-img :src="bimgsrc"> </v-img>
@@ -33,6 +32,7 @@
 
 <script>
 const vlcb = require('../vlcb.js')
+const md = require('markdown-it')()
 
   export default {
     name: 'Brasses',
@@ -49,6 +49,7 @@ const vlcb = require('../vlcb.js')
         const b = vlcb.brasses.getName(n)[0]
 console.dir(b)
         this.currBrass = b    // NOTE DAMN WELL - this only works in function not ()=>
+        this.currBrass.mainNote_html = md.render(b.fields.mainNote)
         if (('pictures' in b.fields) && b.fields.pictures.length>0) {
           const r = b.fields.pictures[0]
 console.log(`r: ${r}`)

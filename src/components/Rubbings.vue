@@ -22,8 +22,7 @@
   <v-row>
         location: {{currRubbing.location}}
   </v-row>
-  <v-row>
-        {{currRubbing.mainNote}}
+  <v-row v-html="currRubbing.mainNote_html">
   </v-row>
   <v-row>
         <v-img :src="rimgsrc"> </v-img>
@@ -39,6 +38,7 @@
 
 <script>
 const vlcb = require('../vlcb.js')
+const md = require('markdown-it')()
 
   export default {
     name: 'Rubbings',
@@ -58,6 +58,8 @@ const vlcb = require('../vlcb.js')
         const u = vlcb.rubbings.byVLCN(n)
 console.dir(u)
         this.currRubbing = u    // NOTE DAMN WELL - this only works in function not ()=>
+console.dir(u)
+        this.currRubbing.mainNote_html = md.render(u.mainNote)
 // why not fields? // note no 'fields' in html {{}} above
         if (('pictures' in u) && u.pictures.length>0) {
           const r = u.pictures[0]

@@ -22,8 +22,7 @@
   <v-row>
         Year: {{currChurch.fields.year}}
   </v-row>
-  <v-row>
-        {{currChurch.fields.mainNote}}
+  <v-row v-html="currChurch.mainNote_html">
   </v-row>
   <v-row>
         <v-img :src="cimgsrc"> </v-img>
@@ -40,6 +39,7 @@
 <script>
 //import App from '../App.vue'
 const vlcb = require('../vlcb.js')
+const md = require('markdown-it')()
 
   export default {
     name: 'Churches',
@@ -56,12 +56,12 @@ const vlcb = require('../vlcb.js')
         const c = vlcb.churches.getName(n)[0]
 console.dir(c)
         this.currChurch = c    // NOTE DAMN WELL - this only works in function not ()=>
+        this.currChurch.mainNote_html = md.render(c.fields.mainNote)
         if (('pictures' in c.fields) && c.fields.pictures.length>0) {
           const r = c.fields.pictures[0]
-console.log(`r: ${r}`)
           const p = vlcb.pictures.getId(r)
-console.dir(p)
           const full = p[0].fields.full
+console.log(`r: ${r}  full: ${full}`)
           this.cimgsrc = full
         } else {
           this.cimgsrc = ''
