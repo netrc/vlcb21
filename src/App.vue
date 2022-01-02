@@ -27,7 +27,20 @@
       <router-link to="/rubbings"> Rubbings </router-link>
       <v-spacer></v-spacer>
 
-      <router-link to="/testpage"> Testpage </router-link>
+      <v-menu  r:rounded="rounded" open-on-hover offset-y transition="slide-x-transition" bottom right>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn flat v-bind="attrs" v-on="on">
+            Info
+          </v-btn>
+        </template>
+        <v-list dense>
+          <v-list-item router to="/testpage">
+            <v-list-item-title> 
+              Test page 
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <v-spacer></v-spacer>
 
       <v-btn
