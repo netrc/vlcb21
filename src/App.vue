@@ -34,11 +34,8 @@
           </v-btn>
         </template>
         <v-list dense>
-          <v-list-item router to="/testpage">
-            <v-list-item-title> 
-              Test page 
-            </v-list-item-title>
-          </v-list-item>
+          <v-list-item router to="/blog"> <v-list-item-title> Blog </v-list-item-title> </v-list-item>
+          <v-list-item router to="/testpage"> <v-list-item-title> Test page </v-list-item-title> </v-list-item>
         </v-list>
       </v-menu>
       <v-spacer></v-spacer>

@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Churches from './components/Churches';
 import Brasses from './components/Brasses';
 import Rubbings from './components/Rubbings';
+import Blog from './components/Blog';
 import Testpage from './components/Testpage';
 
 Vue.config.productionTip = false
@@ -19,6 +20,7 @@ const routes = [
   { path: '/churches', component: Churches },
   { path: '/brasses', component: Brasses },
   { path: '/rubbings', component: Rubbings },
+  { path: '/blog', component: Blog },
   { path: '/testpage', component: Testpage },
 ]
 

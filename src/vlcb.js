@@ -6486,8 +6486,10 @@ const stdFuncs = t => {
   return tObj
 }
 
+const notesIsCategory = c => vlcb.notes.records.filter( r => r.fields.category==c ).map( r => r.fields )
+
 exports.churches = stdFuncs('churches')
 exports.brasses = stdFuncs('brasses')
 exports.rubbings = stdFuncs('rubbings')
 exports.pictures = stdFuncs('pictures')
-exports.notes = stdFuncs('notes')
+exports.notes = { ...stdFuncs('notes'), categoryIs: notesIsCategory }
