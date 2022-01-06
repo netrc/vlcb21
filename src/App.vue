@@ -40,6 +40,13 @@
       </v-menu>
       <v-spacer></v-spacer>
 
+  
+<a class="btn btn-primary btn-sm" href="/.auth/login/github" v-if="!user.userDetails">Login</a> 
+                                
+<a class="btn btn-primary btn-sm" href="/.auth/logout" v-if="user.userDetails">Log out</a>
+<span v-if="user.userDetails">   ... {{user.userDetails}} </span>
+
+
       <v-btn
         href="https://netrc.com/"
         target="_blank"
@@ -64,9 +71,35 @@ export default {
   name: 'App',
 
   data: () => ({
-    //
+    user: '',
+    xu: {
+      userDetails: {},
+      role: 'unauthenticated',
+      name: 'none',
+      email: 'n@none'
+    }
   }),
-};
+
+  beforeMount: function() {
+    console.log('App.vue - BEFOREMOUNT')
+    this.getUser()
+    console.log(`...${this.user}`)
+    console.dir(this.user)
+  },
+  methods: {
+    async getUser() {
+      const response = await fetch("/.auth/me");
+console.log('gu: resp')
+console.dir(response)
+      const payload = await response.json();
+console.log('gu: payl')
+console.dir(payload)
+      const { clientPrincipal } = payload;
+      this.user = clientPrincipal;
+    }
+  }
+
+}
 </script>
 <style scoped>
 .v-main {
@@ -76,3 +109,4 @@ a {
   color: WhiteSmoke !important;
 }
 </style>
+
