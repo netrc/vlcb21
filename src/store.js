@@ -34,19 +34,22 @@ export const mutations = { // needs '=' ?
 export const actions = { 
   login: async function() {  // needs async?
     let clientPrincipal = fakeEditor // assume fake
-console.log(`login F: ${process.env.FAKEUSER}`)
-console.dir(process.env)
-    if (process.env.FAKEUSER != EDITORSTR) { // do real login
-console.log(`login F: calling await fetch`)
+    const fakeuser = process.env.VUE_APP_ENV_FAKEUSER
+console.log(`store login fakeuser: ${fakeuser}`)
+//console.log(`store login: env...`)
+//console.dir(process.env)
+    if (fakeuser != EDITORSTR) { // do real login
+console.log(`store login: calling await fetch`)
       const response = await fetch("/.auth/me");
-console.log('login store gu: resp')
+console.log('store login fetch: resp')
 console.dir(response)
       const payload = await response.json();
-console.log('login store gu: payl')
+console.log('store login: payload')
 console.dir(payload)
       clientPrincipal = payload.clientPrincipal
     }
-console.dir('login clientPrincipal...')
+
+console.dir('store login clientPrincipal...')
 console.dir(clientPrincipal)
     mutations.setProfile(clientPrincipal)
   },
@@ -54,5 +57,3 @@ console.dir(clientPrincipal)
     mutations.setProfile(noUser)
   }
 }
-
-    // async getUser() {
