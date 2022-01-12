@@ -21,7 +21,11 @@
     </v-row>
 
     <v-row justify="center">
-    some stuff {{ userDetails }} end stuff
+    userDetails:  ({{ userDetails }})
+    </v-row>
+
+    <v-row justify="center">
+    roles ({{ userRoles }})
     </v-row>
 
     </v-row>
