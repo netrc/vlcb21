@@ -41,10 +41,10 @@
       <v-spacer></v-spacer>
 
   
-<a class="btn btn-primary btn-sm" href="/.auth/login/github" v-if="!user.userDetails">Login</a> 
+<a class="btn btn-primary btn-sm" href="/.auth/login/github" v-if="!userDetails">Login</a> 
                                 
-<a class="btn btn-primary btn-sm" href="/.auth/logout" v-if="user.userDetails">Log out</a>
-<span v-if="user.userDetails">   ... {{user.userDetails}} </span>
+<a class="btn btn-primary btn-sm" href="/.auth/logout" v-if="userDetails">Log out</a>
+<span v-if="userDetails">   ... {{userDetails}} </span>
 
 
       <v-btn
