@@ -29,7 +29,7 @@
 
       <v-menu  r:rounded="rounded" open-on-hover offset-y transition="slide-x-transition" bottom right>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn flat v-bind="attrs" v-on="on">
+          <v-btn v-bind="attrs" v-on="on">
             Info
           </v-btn>
         </template>
@@ -83,8 +83,7 @@ export default {
 
   beforeMount: function() {
     console.log('App.vue - BEFOREMOUNT')
-    //this.getUser()
-    this.login()
+    this.login() // store.login
     console.log(`...${this.user}`)
     console.dir(this.user)
   },
@@ -92,16 +91,6 @@ export default {
     ...getters
   },
   methods: {
-    async getUser() {
-      const response = await fetch("/.auth/me")
-console.log('gu: resp')
-console.dir(response)
-      const payload = await response.json()
-console.log('gu: payl')
-console.dir(payload)
-      const { clientPrincipal } = payload
-      this.user = clientPrincipal
-    },
     ...mutations, ...actions  //////////////// store stuff
   }
 
