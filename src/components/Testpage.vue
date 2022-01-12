@@ -17,8 +17,11 @@
       </v-col>
 
     <v-row justify="center">
-
       <Testcomponent :propOne="aDataKey" :propTwo="adk2"></Testcomponent>
+    </v-row>
+
+    <v-row justify="center">
+    some stuff {{ userDetails }} end stuff
     </v-row>
 
     </v-row>
@@ -27,10 +30,14 @@
 
 <script>
   import Testcomponent from './Testcomponent'
+  import { getters } from '../store.js'
 
   export default {
     name: 'HelloWorld',
 
+    computed: {
+      ...getters
+    },
     data: () => ({
       aDataKey: 'from tc page via a data key',
       adk2: { msg: 'foo bar baz, set a object key in data in parent component, passed to child prop', k2: 32 },

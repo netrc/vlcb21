@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import { getters, mutations, actions } from './store.js'
 
 export default {
   name: 'App',
@@ -82,21 +83,26 @@ export default {
 
   beforeMount: function() {
     console.log('App.vue - BEFOREMOUNT')
-    this.getUser()
+    //this.getUser()
+    this.login()
     console.log(`...${this.user}`)
     console.dir(this.user)
   },
+  computed: { ///////// the store stuff
+    ...getters
+  },
   methods: {
     async getUser() {
-      const response = await fetch("/.auth/me");
+      const response = await fetch("/.auth/me")
 console.log('gu: resp')
 console.dir(response)
-      const payload = await response.json();
+      const payload = await response.json()
 console.log('gu: payl')
 console.dir(payload)
-      const { clientPrincipal } = payload;
-      this.user = clientPrincipal;
-    }
+      const { clientPrincipal } = payload
+      this.user = clientPrincipal
+    },
+    ...mutations, ...actions  //////////////// store stuff
   }
 
 }
